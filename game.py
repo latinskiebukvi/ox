@@ -64,6 +64,7 @@ class Game:
             i + self.start: cell(mark=mark) for i in range(self.dim * self.dim)
         }
         self.wins = wins
+        self.win_comb = []
         self.win = None
 
     def _set_field(self, key: int, mark: str):
@@ -74,21 +75,24 @@ class Game:
 
     def _wins_check(self, mark: str):
         for w in self.wins:
-            if [str(g.fields[key]) for key in w].count(mark) == self.dim:
-                return mark
+            if [str(self.fields[key]) for key in w].count(mark) == self.dim:
+                return w
         return
 
     def game_turn(self, player: Player, cell: int):
         if player is self.current_player and self.fields[cell] == self.cell:
             mark = player.get_mark()
             self._set_field(cell, mark)
-            self.win = player.get_id() if self._wins_check(mark) else None
+            self.win_comb = self._wins_check(mark)
+            self.win = player.get_id() if self.win_comb else None
             if self.win:
                 print("win", self.win, "\n")
             else:
                 self._swap_players()
+            return True, self.win_comb
         else:
             pass
+        return False, False
 
     def __str__(self):
         fields = self.fields

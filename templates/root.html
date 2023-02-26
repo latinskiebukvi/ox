@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create OX-game</title>
+</head>
+<body>
+    <h1>Hi, put your id here</h1>
+    <form name="loginBox" target="#here" method="post" onsubmit="sendFormData();return false">
+        <input name="user_id" type="text"/>
+        <input type="submit" hidden>
+    </form>
+</body>
+<script src="{{ url_for('static', path='/root.js') }}"></script>
+</html>
