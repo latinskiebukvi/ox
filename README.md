@@ -1,13 +1,14 @@
 # ox
 
 ```
-python game.py
+python -m pip install -r requirements.txt
 ```
-will print:
+then:
 ```
-win 1
-
-xo-
-xo-
-x--
+uvicorn main:app --port 8000
 ```
+go to:
+```
+http://localhost:8000/
+```
+duplicate the tab and send different integers in text inputs, hf

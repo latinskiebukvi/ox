@@ -39,7 +39,14 @@ async def root_post(request: Request):
     PLAYERS[id_] = Player(id_, mark=MARKS.get())
     print(PLAYERS)
     if len(PLAYERS) == 2:
-        GAMES.append(Game(wins=WINS, cell=Cell, dim=DIM, players=[player for player in PLAYERS.values()]))
+        GAMES.append(
+            Game(
+                wins=WINS,
+                cell=Cell,
+                dim=DIM,
+                players=[player for player in PLAYERS.values()],
+            )
+        )
 
     return RedirectResponse(f"/game/{id_}")
 
@@ -61,7 +68,7 @@ async def websocket_endpoint(websocket: WebSocket):
         player = PLAYERS[int(data["player"])]
         cell_id = int(data["cell"])
         flag, comb = g.game_turn(player, cell_id)
-        
+
         if flag:
             data["comb"] = comb
             data["mark"] = player.get_mark()
